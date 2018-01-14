@@ -1,4 +1,7 @@
+import * as API from '../utils/api'
+
 // Action types
+export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const ADD_POST = 'ADD_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const EDIT_POST = 'EDIT_POST'
@@ -10,6 +13,19 @@ export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT'
 
 // Action creators
+export const RECEIVE_TODOS = "RECEIVE_TODOS";
+
+export const receivePosts = posts => ({
+  type: RECEIVE_POSTS,
+  posts
+})
+
+export const fetchPosts = () => dispatch => (
+  API
+    .fetchPosts()
+    .then(posts => dispatch(receivePosts(posts)))
+)
+
 export const addPost = ({title, body, author, category}) => ({
   type: ADD_POST,
   title,
@@ -37,12 +53,12 @@ export const upVotePost = id => ({
   id,
 })
 
-export const addComment = ({parentId, body, author}) => ({
+export const addComment = ({parentId, title, body, author}) => ({
   type: ADD_COMMENT,
+  parentId,
   title,
   body,
   author,
-  category,
 })
 
 export const deleteComment = id => ({
@@ -50,13 +66,12 @@ export const deleteComment = id => ({
   id,
 })
 
-export const editComment = ({id, title, body, author, category}) => ({
+export const editComment = ({id, title, body, author}) => ({
   type: EDIT_COMMENT,
   id,
   title,
   body,
   author,
-  category,
 })
 
 export const upVoteComment = id => ({

@@ -22,14 +22,21 @@ class App extends Component {
           <h1 className="Container-title">Readable</h1>
         </header>
         <div className="Categories">
-          {categories.map(category => (
-            <li key={category.name}>
-              <p> {category.path} </p>
-            </li>
-          ))}
+          <ul>
+            {categories.map(category => (
+              <li key={category.name}>
+                <p> {category.path} </p>
+              </li>
+            ))}
+          </ul>
         </div>
         <div className="Top-bar">
-
+          <div className="Filter">
+            Filter
+          </div>
+          <div className="New-post">
+            New Post
+          </div>
         </div>
         <div className="Posts">
           {posts.map(post => (

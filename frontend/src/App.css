@@ -4,13 +4,20 @@
 
 .Container-header {
   background-color: #225;
-  height: 100px;
-  padding: 20px;
+  height: 3.5em;
+  padding: 1em;
   color: white;
 }
 
 .Container-title {
   font-size: 1.5em;
+}
+
+.Posts {
+  text-align: center;
+}
+.Post-container {
+
 }
 
 .App-intro {

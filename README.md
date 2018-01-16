@@ -1,7 +1,7 @@
 # Readable Project
 
 This is the Readable project built for React Nanodegree at Udacity.
-The Readable project is a content and comment web app where uses can post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users are also be able to edit and delete posts and comments.
+The Readable project is a content and comment web app where users can post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users are also be able to edit and delete posts and comments.
 
 
 ## Install and launch

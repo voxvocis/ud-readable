@@ -1,6 +1,6 @@
 # Frontend
 
-To install and start the API server, run the following commands in this directory:
+To install and start, run the following commands in this directory:
 
 * `npm install`
 * `npm start`

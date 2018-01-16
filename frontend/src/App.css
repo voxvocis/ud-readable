@@ -3,32 +3,92 @@
 }
 
 .Container-header {
-  background-color: #225;
-  height: 3.5em;
+  background-color: #ff9800;
+  height: 4em;
   padding: 1em;
   color: white;
+  margin-bottom: 2em;
 }
 
 .Container-title {
-  font-size: 1.5em;
+  font-size: 2em;
+  margin-top: 1em;
+  transform: translateY(-50%);
 }
 
 .Posts {
   color: white;
   text-align: center;
-  background-color: #724;
+  margin-left: 25%;
+  margin-right: 25%;
 }
+
 .Post-container {
-  display: flex;
-  justify-content: space-around;
-  background-color: #934;
-  margin: 1em;
+  background-color: #0099;
+  margin-bottom: 1em;
+  height: 5em;
+}
+
+.Post-score {
+  float:left;
+  margin-top: 1em;
+  padding: 1em;
+}
+
+.Post-score-vote {
+  float: left;
+  margin-right: 0.5em;
+  border-style: none;
+  border-bottom-color: transparent;
+  padding: 0;
+  border-width: 0;
+  border-color: transparent;
+  background-color: transparent;
+  color: white;
+}
+
+.Post-score-value {
+  float: left;
+}
+
+.Post-title {
+  background-color: #ff9800;
+  font-weight: bold;
+  color: #009;
+  margin-bottom: 0.2em;
+  padding-right: 10%;
+}
+
+.Post-author {
+  float:right;
+  margin-right: 1em;
+}
+
+
+.Post-date {
+  float: right;
+}
+
+.Post-date-container {
+  margin-top: 3em;
+  font-size: 0.5em;
+  margin-right: 1em;
+}
+
+.Post-comments-container {
+  margin-top: 3em;
+}
+
+.Post-comments {
+  margin-top: 2em;
+  font-size: 0.7em;
 }
 
 .Categories {
   color: white;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  margin-bottom: 2em;
 }
 
 ul {
@@ -36,12 +96,34 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
 }
 
 li {
   float: left;
   margin-left: 2em;
+  background-color: #ff9800;
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+a {
+  text-decoration: none;
+}
+
+.New-post {
+  position: fixed;
+  right: 5em;
+  top: 2em;
+  border: 3px solid #0099;
+  padding: 0.5em;
+}
+
+.Filter {
+  position: fixed;
+  left: 5em;
+  top: 2em;
+  border: 3px solid #0099;
+  padding: 0.5em;
 }
 
 .Top-bar {

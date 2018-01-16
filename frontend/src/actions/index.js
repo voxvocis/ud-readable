@@ -15,14 +15,20 @@ export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT'
 
 // Action creators
+export const postVote = (id, option) => dispatch => (
+  API
+    .postVote(id, option)
+    .then(() => dispatch(getPosts()))
+)
+
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
   categories,
 })
 
-export const fetchCategories = () => dispatch => (
+export const getCategories = () => dispatch => (
   API
-    .fetchCategories()
+    .getCategories()
     .then(categories => dispatch(receiveCategories(categories)))
 )
 
@@ -31,9 +37,9 @@ export const receivePosts = posts => ({
   posts,
 })
 
-export const fetchPosts = () => dispatch => (
+export const getPosts = () => dispatch => (
   API
-    .fetchPosts()
+    .getPosts()
     .then(posts => dispatch(receivePosts(posts)))
 )
 

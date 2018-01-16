@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPosts, fetchCategories } from '../actions'
+import { Route, Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
+import {
+  getPosts,
+  getCategories,
+  postVote,
+} from '../actions'
 import '../App.css';
 import Post from './Post'
 
@@ -10,8 +16,8 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchPosts();
-    this.props.fetchCategories();
+    this.props.getPosts();
+    this.props.getCategories();
   }
 
   render() {
@@ -19,13 +25,18 @@ class App extends Component {
     return (
       <div className="Container">
         <header className="Container-header">
-          <h1 className="Container-title">Readable</h1>
+          <Link to="/">
+            <h1 className="Container-title">Readable</h1>
+          </Link>
         </header>
         <div className="Categories">
           <ul>
             {categories.map(category => (
               <li key={category.name}>
-                <p> {category.path} </p>
+                <Link
+                  className='category'
+                  to={'/' + category.path}
+                ><p>{category.path} </p></Link>
               </li>
             ))}
           </ul>
@@ -35,24 +46,54 @@ class App extends Component {
             Filter
           </div>
           <div className="New-post">
-            New Post
+            <Link to="/#">
+              New Post
+            </Link>
           </div>
         </div>
-        <div className="Posts">
-          {posts.map(post => (
-            <Post
-              key={post.id}
-              id={post.id}
-              date={post.timestamp}
-              title={post.title}
-              body={post.body}
-              author={post.author}
-              category={post.category}
-              score={post.voteScore}
-              comments={post.commentCount}
-            />
-          ))}
-        </div>
+        <Route exact path='/' render={() => (
+          <div className="Posts">
+            {posts.map(post => (
+              <Post
+                key={post.id}
+                id={post.id}
+                date={post.timestamp}
+                title={post.title}
+                body={post.body}
+                author={post.author}
+                category={post.category}
+                score={post.voteScore}
+                comments={post.commentCount}
+                dispatchVote={this.props.postVote}
+              />
+            ))}
+          </div>
+        )} />
+        {categories.map(category => (
+          <Route key={category.path} exact path={'/' + category.path} render={() => (
+            <div className="Posts">
+              {posts
+                .filter(post => (
+                  post.category === category.path
+                ))
+                .map(post => (
+                  <Post
+                    key={post.id}
+                    id={post.id}
+                    date={post.timestamp}
+                    title={post.title}
+                    body={post.body}
+                    author={post.author}
+                    category={post.category}
+                    score={post.voteScore}
+                    comments={post.commentCount}
+                    dispatchVote={this.props.postVote}
+                  />
+                ))
+              }
+            </div>
+          )} />
+        ))}
       </div>
     )
   }
@@ -70,10 +111,11 @@ const mapStateToProps = ({ posts, categories }) => ({
 // mapDispatchToProps() can clean up the code above just a bit.
 // The whole point of mapDispatchToProps() is to make it so you can bind dispatch() to your action creators before they ever hit your component
 const mapDispatchToProps = dispatch => ({
-  fetchPosts: () => dispatch(fetchPosts()),
-  fetchCategories: () => dispatch(fetchCategories()),
+  getPosts: () => dispatch(getPosts()),
+  getCategories: () => dispatch(getCategories()),
+  postVote: (id, option) => dispatch(postVote(id, option)),
 })
 
 // When you connect a component, that component will automatically be passed Redux's dispatch() method.
 // What that means is that if you want to dispatch an action
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

@@ -2,7 +2,7 @@ import React from 'react'
 import Icon from 'react-icons-kit'
 import { heart } from 'react-icons-kit/icomoon/heart'
 import { heartBroken } from 'react-icons-kit/icomoon/heartBroken'
-import { Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function Post({ id, title, author, score, comments, date, dispatchVote, category }) {
   const upVote = () => {

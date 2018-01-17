@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import {
   getPosts,
@@ -16,7 +15,7 @@ class Home extends Component {
   }
 
   render() {
-    const { posts, categories } = this.props
+    const { posts } = this.props
     const { category } = this.props.match.params
     return (
       <div className="Posts">
@@ -47,9 +46,8 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = ({ posts, categories }) => ({
+const mapStateToProps = ({ posts }) => ({
     posts: Object.values(posts),
-    categories: Object.values(categories),
   })
 
 

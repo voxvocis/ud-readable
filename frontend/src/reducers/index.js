@@ -4,15 +4,28 @@ import {
    ADD_COMMENT,
    RECEIVE_POSTS,
    RECEIVE_CATEGORIES,
+   FILTER_ON_SCORE,
+   RECEIVE_POST_DETAILS,
+   RECEIVE_COMMENTS,
  } from '../actions'
 
 function posts(state = {}, action) {
    switch (action.type) {
      case RECEIVE_POSTS:
       const { posts } = action
+      const postObject = posts.reduce((acc, post) => {
+        acc[post.id] = post
+        return acc
+      }, {})
       return {
         ...state,
-        ...posts,
+        ...postObject,
+      }
+    case RECEIVE_POST_DETAILS:
+      const { post } = action
+      return {
+        ...state,
+        [post.id]: post,
       }
      case ADD_POST:
        const { category } = action
@@ -22,13 +35,23 @@ function posts(state = {}, action) {
    }
  }
 
+function postDetails(state = {}, action) {
+  switch (action.type) {
+   case RECEIVE_POST_DETAILS:
+     const { post } = action
+     return post
+    default:
+      return state
+  }
+}
+
 function categories(state = {}, action) {
-  const { categories } = action
   switch (action.type) {
     case RECEIVE_CATEGORIES:
-      const categoriesObj = categories.categories.reduce((categories, category, i) => {
-        categories[i] = category
-        return categories
+      const { categories } = action
+      const categoriesObj = categories.categories.reduce((acc, category) => {
+        acc[category.path] = category
+        return acc
       }, {})
       return {
         ...state,
@@ -41,16 +64,43 @@ function categories(state = {}, action) {
 
  function comments(state = {}, action) {
     switch (action.type) {
-      case ADD_COMMENT:
-        const { parentId } = action
-        return state
+      case RECEIVE_COMMENTS:
+        const { comments } = action
+        const commentsObj = comments.reduce((acc, comment) => {
+          acc[comment.id] = comment
+          return acc
+        }, {})
+        return {
+          ...state,
+          ...commentsObj,
+        }
       default:
         return state
     }
   }
 
+const initialFilterState = {
+  score: false,
+  date: false,
+}
+
+  function filter(state = initialFilterState, action) {
+     switch (action.type) {
+       case FILTER_ON_SCORE:
+         const { filter } = action
+         return {
+           ...state,
+           ['score']: filter,
+         }
+       default:
+         return state
+     }
+   }
+
  export default combineReducers({
    posts,
    categories,
    comments,
+   filter,
+   postDetails,
  })

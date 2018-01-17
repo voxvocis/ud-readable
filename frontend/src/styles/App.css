@@ -26,7 +26,10 @@
 .Post-container {
   background-color: #0099;
   margin-bottom: 1em;
-  height: 5em;
+}
+
+.Post-detail-container {
+  background-color: #0099;
 }
 
 .Post-score {
@@ -76,12 +79,27 @@
 }
 
 .Post-comments-container {
-  margin-top: 3em;
+  margin-top: 0em;
 }
 
 .Post-comments {
+  font-size: 0.7em;
+}
+
+.Post-detail-commentCount {
   margin-top: 2em;
   font-size: 0.7em;
+}
+
+.Post-detail-comments {
+  margin-top: 2em;
+  font-size: 0.7em;
+  color: black;
+}
+
+.Post-detail-body {
+  word-wrap: break-word;
+  margin: 10%;
 }
 
 .Categories {

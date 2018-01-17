@@ -10,7 +10,7 @@ import '../styles/App.css';
 class TopBar extends Component {
 
   componentWillMount() {
-    this.props.getCategories();
+    this.props.getCategories()
   }
 
   render() {

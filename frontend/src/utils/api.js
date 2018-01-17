@@ -13,7 +13,7 @@ export function getPosts() {
 }
 
 export function getPostsById(id) {
-  const url = `${BASE_URL}/posts${id}`
+  const url = `${BASE_URL}/posts/${id}`
   return get(url)
 }
 

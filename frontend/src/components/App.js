@@ -26,9 +26,7 @@ class App extends Component {
 }
 
 const NotFound = () => {
-  return <div>Not found</div>;
-};
+  return <div>Not found</div>
+}
 
 export default withRouter(connect()(App))
-
-// (connect(mapStateToProps, mapDispatchToProps)(Home))

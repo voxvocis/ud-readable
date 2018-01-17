@@ -2,8 +2,9 @@ import React from 'react'
 import Icon from 'react-icons-kit'
 import { heart } from 'react-icons-kit/icomoon/heart'
 import { heartBroken } from 'react-icons-kit/icomoon/heartBroken'
+import { Route, Link } from 'react-router-dom'
 
-export default function Post({ id, title, author, score, comments, date, dispatchVote }) {
+export default function Post({ id, title, author, score, comments, date, dispatchVote, category }) {
   const upVote = () => {
     dispatchVote(id, 'upVote')
   }
@@ -22,7 +23,9 @@ export default function Post({ id, title, author, score, comments, date, dispatc
         <div className="Post-score-value">Score: { score }</div>
       </div>
       <div className="Post-title">
+      <Link to={`/${category}/${id}`}>
         { title }
+      </Link>
       </div>
       <div>
         <div className="Post-author">

@@ -1,5 +1,10 @@
 const HEADERS = { 'Authorization': 'test' }
-const POST_HEADERS = {...HEADERS, "Content-Type": "application/json"}
+
+const POST_HEADERS = {
+  ...HEADERS,
+  "Content-Type": "application/json"
+}
+
 const BASE_URL = 'http://localhost:3001'
 
 export function getPosts() {
@@ -72,6 +77,7 @@ export function postComment(body) {
 const get = url => {
   return fetch(url, { headers: HEADERS })
     .then((res) => res.json())
+    .catch(err => console.log(err))
 }
 
 const post = (url, body) => {
@@ -100,4 +106,5 @@ const deleteIt = url => {
     headers: HEADERS,
   })
     .then((res) => res.json())
+    .catch(err => console.log(err))
 }

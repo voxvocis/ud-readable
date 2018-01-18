@@ -8,6 +8,7 @@ import reducer from './reducers'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { BrowserRouter } from 'react-router-dom'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
@@ -29,11 +30,17 @@ const store = createStore(
   )
 )
 
-ReactDOM.render(
+const ReadableApp = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <MuiThemeProvider>
+        <App />
+      </MuiThemeProvider>
     </BrowserRouter>
-  </Provider>,
+  </Provider>
+)
+
+ReactDOM.render(
+  <ReadableApp />,
   document.getElementById('root'))
 registerServiceWorker()

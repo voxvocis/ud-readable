@@ -12,7 +12,7 @@ class Home extends Component {
   }
 
   render() {
-    const { posts } = this.props
+    const { posts, filter } = this.props
     const { category } = this.props.match.params
     return (
       <div className="Posts">
@@ -23,6 +23,15 @@ class Home extends Component {
               return true
             }
           })
+            .sort((a, b) => {
+              if (filter.score) {
+                return a.voteScore - b.voteScore
+              } else if (filter.date) {
+                return a.timestamp - b.timestamp
+              } else {
+                // nothing
+              }
+            })
             .map(post => (
               <Post
                 key={post.id}
@@ -43,8 +52,9 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = ({ posts }) => ({
+const mapStateToProps = ({ posts, filter }) => ({
   posts: Object.values(posts),
+  filter,
 })
 
 export default withRouter(connect(mapStateToProps, actions)(Home))

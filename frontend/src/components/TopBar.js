@@ -2,12 +2,26 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
-import {
-  getCategories,
-} from '../actions'
+import * as actions from '../actions'
 import '../styles/App.css';
+import FilterButton from './FilterButton'
+import CreatePost from './CreatePost'
+import RaisedButton from 'material-ui/RaisedButton';
 
 class TopBar extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      openModal: false,
+    }
+  }
+
+  closeModal = () => {
+    this.setState({
+      openModal: false,
+    })
+  }
 
   componentWillMount() {
     this.props.getCategories()
@@ -15,6 +29,7 @@ class TopBar extends Component {
 
   render() {
     const { categories } = this.props
+    const { openModal } = this.state
     return (
       <div>
         <header className="Container-header">
@@ -26,36 +41,52 @@ class TopBar extends Component {
           <ul>
             {categories.map(category => (
               <li key={category.name}>
-                <Link
-                  className='category'
-                  to={'/' + category.path}
-                ><p>{category.path} </p></Link>
+                <Link to={'/' + category.path}>
+                  <RaisedButton
+                    className="category"
+                    label={category.path}
+                    backgroundColor="#0099"
+                    labelColor="#fff"
+                  />
+                </Link>
               </li>
             ))}
           </ul>
         </div>
         <div className="Top-bar">
-          <div className="Filter">
-            Filter
-          </div>
-          <div className="New-post">
-            <Link to="/#">
-              New Post
-            </Link>
-          </div>
+          <FilterButton
+            filterOnDate={this.props.filterOnDate}
+            filterOnScore={this.props.filterOnScore}
+            score={this.props.filter.score}
+            date={this.props.filter.date}
+          />
+          <Link to="/#">
+            <RaisedButton
+              className="New-post"
+              label="New Post"
+              backgroundColor="#0099"
+              labelColor="#fff"
+              onClick={() => this.setState({
+                openModal: true
+              })}
+            />
+          </Link>
         </div>
+        {openModal && (
+          <CreatePost
+            open={this.state.openModal}
+            closeModal={this.closeModal}
+            title="Create new Post"
+          />
+        ) }
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ categories }) => ({
+const mapStateToProps = ({ categories, filter }) => ({
     categories: Object.values(categories),
+    filter,
   })
 
-
-const mapDispatchToProps = dispatch => ({
-  getCategories: () => dispatch(getCategories()),
-})
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TopBar))
+export default withRouter(connect(mapStateToProps, actions)(TopBar))

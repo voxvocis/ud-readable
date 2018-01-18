@@ -86,20 +86,30 @@
   font-size: 0.7em;
 }
 
+.Post-detail-body {
+  word-wrap: break-word;
+  margin: 10%;
+}
+
 .Post-detail-commentCount {
   margin-top: 2em;
   font-size: 0.7em;
 }
 
 .Post-detail-comments {
-  margin-top: 2em;
   font-size: 0.7em;
-  color: black;
+  color: white;
+  background-color: #0099;
 }
 
-.Post-detail-body {
+.Post-detail-comment-body {
   word-wrap: break-word;
-  margin: 10%;
+}
+
+.Post-comment-wrapper {
+  background-color: #ff9800;
+  font-weight: bold;
+  color: #009;
 }
 
 .Categories {
@@ -120,8 +130,6 @@ li {
   float: left;
   margin-left: 2em;
   background-color: #ff9800;
-  padding-right: 1em;
-  padding-left: 1em;
 }
 
 a {
@@ -132,16 +140,12 @@ a {
   position: fixed;
   right: 5em;
   top: 2em;
-  border: 3px solid #0099;
-  padding: 0.5em;
 }
 
 .Filter {
   position: fixed;
   left: 5em;
   top: 2em;
-  border: 3px solid #0099;
-  padding: 0.5em;
 }
 
 .Top-bar {

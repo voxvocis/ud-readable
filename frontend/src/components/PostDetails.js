@@ -83,11 +83,4 @@ const mapStateToProps = ({ postDetails, comments }) => ({
     comments: Object.values(comments)
   })
 
-
-const mapDispatchToProps = dispatch => ({
-  postVote: (id, option) => dispatch(postVote(id, option)),
-  getPostsById: id => dispatch(getPostsById(id)),
-  getCommentsByPostId: id => dispatch(getCommentsByPostId(id)),
-})
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostDetails))
+export default withRouter(connect(mapStateToProps, {postVote, getPostsById, getCommentsByPostId})(PostDetails))

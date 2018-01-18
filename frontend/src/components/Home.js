@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import {
-  getPosts,
-  postVote,
-} from '../actions'
+import * as actions from '../actions/posts'
 import '../styles/App.css';
 import Post from './Post'
 
@@ -47,13 +44,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = ({ posts }) => ({
-    posts: Object.values(posts),
-  })
-
-
-const mapDispatchToProps = dispatch => ({
-  getPosts: () => dispatch(getPosts()),
-  postVote: (id, option) => dispatch(postVote(id, option)),
+  posts: Object.values(posts),
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home))
+export default withRouter(connect(mapStateToProps, actions)(Home))

@@ -69,8 +69,37 @@ class PostDetails extends Component {
           </div>
         </div>
         <div className="Post-detail-comments" >
+          <div className="Post-comment-wrapper">
+            Comments:
+          </div>
         {comments.map(comment => (
-          <div> {comment.body} </div>
+          <div className="Post-comment-container">
+            <div className="Post-score">
+              <button type="button" className="Post-score-vote" onClick={this.upVote}>
+                <Icon icon={heart}/>
+              </button>
+              <button type="button" className="Post-score-vote" onClick={this.downVote}>
+                <Icon icon={heartBroken} />
+              </button>
+              <div className="Post-score-value">Score: { comment.voteScore }</div>
+            </div>
+            <div className="Post-title">
+             title
+            </div>
+            <div>
+              <div className="Post-author">
+                { comment.author }
+              </div>
+            </div>
+            <div className="Post-date-container">
+              <div className="Post-date">
+                { (new Date(comment.timestamp)).toGMTString() }
+              </div>
+            </div>
+            <div className="Post-detail-comment-body">
+              {comment.body}
+            </div>
+          </div>
         ))}
         </div>
       </div>

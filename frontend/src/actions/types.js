@@ -14,3 +14,4 @@ export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT'
 
 export const FILTER_ON_SCORE = 'FILTER_ON_SCORE'
+export const FILTER_ON_DATE = 'FILTER_ON_DATE'

@@ -25,9 +25,9 @@ class Home extends Component {
           })
             .sort((a, b) => {
               if (filter.score) {
-                return a.voteScore - b.voteScore
+                return b.voteScore - a.voteScore
               } else if (filter.date) {
-                return a.timestamp - b.timestamp
+                return b.timestamp - a.timestamp
               } else {
                 0
               }

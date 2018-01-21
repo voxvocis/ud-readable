@@ -77,6 +77,8 @@ class TopBar extends Component {
             open={this.state.openModal}
             closeModal={this.closeModal}
             title="Create new Post"
+            categories={categories}
+            createPost={this.props.addPost}
           />
         ) }
       </div>

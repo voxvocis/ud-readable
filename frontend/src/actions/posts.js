@@ -1,5 +1,6 @@
 import * as API from '../utils/api'
 import * as type from './types'
+const uuidv4 = require('uuid/v4')
 
 
 export const postVote = (id, option) => dispatch => (
@@ -33,13 +34,22 @@ export const getPostsById = id => dispatch => (
     .then(post => dispatch(receivePostDetails(post)))
 )
 
-export const addPost = ({title, body, author, category}) => ({
-  type: type.ADD_POST,
-  title,
-  body,
-  author,
-  category,
-})
+
+export const addPost = ({title, body, author, category}) => dispatch => (
+  API
+    .postPost({
+      id: uuidv4(),
+      timestamp: Date.now(),
+      title,
+      body,
+      author,
+      category,
+      voteScore: 0,
+      deleted: false,
+      commentCount: 0,
+    })
+    .then(() => dispatch(getPosts()))
+)
 
 export const deletePost = id => ({
   type: type.DELETE_POST,

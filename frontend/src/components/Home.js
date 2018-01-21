@@ -29,7 +29,7 @@ class Home extends Component {
               } else if (filter.date) {
                 return a.timestamp - b.timestamp
               } else {
-                // nothing
+                0
               }
             })
             .map(post => (

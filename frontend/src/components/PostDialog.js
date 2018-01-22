@@ -7,13 +7,17 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
 
-export default class CreatePost extends Component {
-  state = {
-    open: this.props.open,
-    title: '',
-    message: '',
-    author: '',
-    categoryValue: '',
+export default class PostDialog extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      open: this.props.open,
+      title: this.props.title ? this.props.title : '',
+      message: this.props.message ? this.props.message : '',
+      author: this.props.author ? this.props.author : '',
+      categoryValue: this.props.categoryValue ? this.props.categoryValue : '',
+    }
   }
 
   handleOpen = () => {
@@ -33,6 +37,17 @@ export default class CreatePost extends Component {
       category: this.state.categoryValue,
     }
     this.props.createPost(body)
+    this.handleClose()
+  }
+
+  handleEdit = () => {
+    const body = {
+      title: this.state.title,
+      body: this.state.message,
+      author: this.state.author,
+      category: this.state.categoryValue,
+    }
+    // this.props.createPost(body)
     this.handleClose()
   }
 
@@ -61,7 +76,7 @@ export default class CreatePost extends Component {
   }
 
   render() {
-    const { title, categories } = this.props
+    const { categories, edit } = this.props
 
     const actions = [
       <FlatButton
@@ -70,16 +85,16 @@ export default class CreatePost extends Component {
         onClick={this.handleClose}
       />,
       <FlatButton
-        label="Submit"
+        label={edit ? 'Edit' : 'Submit'}
         primary={true}
         keyboardFocused={true}
-        onClick={this.handleSubmit}
+        onClick={edit ? this.handleEdit : this.handleSubmit}
+        backgroundColor="#0099"
       />,
     ]
 
     return (
       <Dialog
-        title={title}
         actions={actions}
         modal={false}
         open={this.state.open}

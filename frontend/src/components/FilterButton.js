@@ -49,6 +49,7 @@ export default class FilterButton extends Component {
           className="Filter"
           backgroundColor="#0099"
           labelColor="#fff"
+          disabled={!this.props.filterEnabled}
         />
         <Popover
           open={this.state.open}

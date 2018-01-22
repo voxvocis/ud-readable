@@ -13,7 +13,6 @@ export default function posts(state = {}, action) {
           return acc
         }, {})
       return {
-        ...state,
         ...postObject,
       }
     case RECEIVE_POST_DETAILS:

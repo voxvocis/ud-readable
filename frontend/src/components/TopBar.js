@@ -5,8 +5,8 @@ import { withRouter } from 'react-router'
 import * as actions from '../actions'
 import '../styles/App.css';
 import FilterButton from './FilterButton'
-import CreatePost from './CreatePost'
-import RaisedButton from 'material-ui/RaisedButton';
+import PostDialog from './PostDialog'
+import RaisedButton from 'material-ui/RaisedButton'
 
 class TopBar extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class TopBar extends Component {
   }
 
   render() {
-    const { categories } = this.props
+    const { categories, filter } = this.props
     const { openModal } = this.state
     return (
       <div>
@@ -57,8 +57,9 @@ class TopBar extends Component {
           <FilterButton
             filterOnDate={this.props.filterOnDate}
             filterOnScore={this.props.filterOnScore}
-            score={this.props.filter.score}
-            date={this.props.filter.date}
+            score={filter.score}
+            date={filter.date}
+            filterEnabled={filter.enabled}
           />
           <Link to="/#">
             <RaisedButton
@@ -73,10 +74,9 @@ class TopBar extends Component {
           </Link>
         </div>
         {openModal && (
-          <CreatePost
+          <PostDialog
             open={this.state.openModal}
             closeModal={this.closeModal}
-            title="Create new Post"
             categories={categories}
             createPost={this.props.addPost}
           />

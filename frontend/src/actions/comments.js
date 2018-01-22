@@ -1,5 +1,6 @@
 import * as API from '../utils/api'
 import * as type from './types'
+import { getPostsById } from './posts'
 
 export const receiveComments = comments => ({
   type: type.RECEIVE_COMMENTS,
@@ -33,7 +34,11 @@ export const editComment = ({id, title, body, author}) => ({
   author,
 })
 
-export const upVoteComment = id => ({
-  type: type.UP_VOTE_COMMENT,
-  id,
-})
+export const upVoteComment = (id, postID, option) => dispatch => (
+  API
+    .commentVote(id, option)
+    .then(() => {
+      dispatch(getCommentsByPostId(postID))
+      dispatch(getPostsById(postID))
+    })
+)

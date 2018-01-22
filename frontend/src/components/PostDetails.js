@@ -6,10 +6,12 @@ import {
   postVote,
   getPostsById,
   getCommentsByPostId,
+  upVoteComment,
 } from '../actions'
 import Icon from 'react-icons-kit'
 import { heart } from 'react-icons-kit/icomoon/heart'
 import { heartBroken } from 'react-icons-kit/icomoon/heartBroken'
+import RaisedButton from 'material-ui/RaisedButton'
 import '../styles/App.css';
 
 class PostDetails extends Component {
@@ -26,6 +28,14 @@ class PostDetails extends Component {
 
   downVote = () => {
     this.props.postVote(this.props.match.params.post_id, 'downVote')
+  }
+
+  commentUpVote = id => {
+    this.props.upVoteComment(id, this.props.match.params.post_id, 'upVote')
+  }
+
+  commentDownVote = id => {
+    this.props.upVoteComment(id, this.props.match.params.post_id, 'downVote')
   }
 
   render() {
@@ -67,23 +77,37 @@ class PostDetails extends Component {
               No. of comments: {commentCount}
             </div>
           </div>
+          <div className="Post-action-buttons">
+            <RaisedButton
+              label="Edit"
+              backgroundColor="#0099"
+              labelColor="#fff"
+              onClick={() => (console.log())}
+            />
+            <RaisedButton
+              label="Delete"
+              backgroundColor="#0099"
+              labelColor="#fff"
+              onClick={() => (console.log())}
+            />
+          </div>
         </div>
         <div className="Post-detail-comments" >
           <div className="Post-comment-wrapper">
             Comments:
           </div>
         {comments.map(comment => (
-          <div className="Post-comment-container">
+          <div className="Comment-container" key={comment.id}>
             <div className="Post-score">
-              <button type="button" className="Post-score-vote" onClick={this.upVote}>
+              <button type="button" className="Post-score-vote" onClick={() => (this.commentUpVote(comment.id))}>
                 <Icon icon={heart}/>
               </button>
-              <button type="button" className="Post-score-vote" onClick={this.downVote}>
+              <button type="button" className="Post-score-vote" onClick={() => (this.commentDownVote(comment.id))}>
                 <Icon icon={heartBroken} />
               </button>
               <div className="Post-score-value">Score: { comment.voteScore }</div>
             </div>
-            <div className="Post-title">
+            <div className="Comment-title">
              title
             </div>
             <div>
@@ -112,4 +136,4 @@ const mapStateToProps = ({ postDetails, comments }) => ({
     comments: Object.values(comments)
   })
 
-export default withRouter(connect(mapStateToProps, {postVote, getPostsById, getCommentsByPostId})(PostDetails))
+export default withRouter(connect(mapStateToProps, {postVote, getPostsById, getCommentsByPostId, upVoteComment})(PostDetails))

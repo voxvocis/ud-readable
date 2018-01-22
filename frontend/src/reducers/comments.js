@@ -13,7 +13,6 @@ export default function comments(state = {}, action) {
         return acc
       }, {})
       return {
-        ...state,
         ...commentsObj,
       }
     default:

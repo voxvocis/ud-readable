@@ -16,7 +16,7 @@ class App extends Component {
           <Route exact path='/' component={Home}/>
           <Route exact path='/:category' component={Home}/>
           <Route exact path="/:category/:post_id" component={PostDetails} />
-          <Route exact path="/edit-post/:id" component={NotFound} />
+          <Route exact path="/edit-post/:id" component={Home} />
           <Route path="*" component={NotFound} />
         </Switch>
       </div>

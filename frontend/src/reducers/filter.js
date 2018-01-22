@@ -6,6 +6,7 @@ import {
 const initialFilterState = {
   score: false,
   date: false,
+  enabled: true,
 }
 
 export default function filter(state = initialFilterState, action) {

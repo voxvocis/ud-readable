@@ -7,7 +7,7 @@ import Icon from 'react-icons-kit'
 import { heart } from 'react-icons-kit/icomoon/heart'
 import { heartBroken } from 'react-icons-kit/icomoon/heartBroken'
 import RaisedButton from 'material-ui/RaisedButton'
-import PostDialog from './PostDialog'
+import CommentDialog from './CommentDialog'
 import '../styles/App.css';
 
 class PostDetails extends Component {
@@ -16,12 +16,16 @@ class PostDetails extends Component {
 
     this.state = {
       openModal: false,
+      edit: false,
+      editComment: null,
     }
   }
 
   closeModal = () => {
     this.setState({
       openModal: false,
+      edit: false,
+      editComment: null,
     })
   }
 
@@ -47,13 +51,29 @@ class PostDetails extends Component {
     this.props.upVoteComment(id, this.props.match.params.post_id, 'downVote')
   }
 
+  editComment = (id, author, message) => {
+    this.setState({
+      editComment: {
+        id,
+        author,
+        message,
+      },
+      edit: true,
+      openModal: true,
+    })
+  }
+
+  deleteComment = id => {
+    this.props.deleteComment(id, this.props.match.params.post_id)
+  }
   deleteIt = () => {
     this.props.deletePost(this.props.post.id)
     this.props.history.push('/')
   }
 
   render() {
-    const { openModal } = this.state
+    const { openModal, editComment, edit } = this.state
+    console.log(editComment);
     const { post, comments } = this.props
     const { voteScore, title, author, timestamp, body, commentCount, category, id} = post
     return (
@@ -143,13 +163,15 @@ class PostDetails extends Component {
                 label="Edit"
                 backgroundColor="#ff9800"
                 labelColor="#fff"
-                onClick={this.editComment}
+                onClick={() => {
+                  this.editComment(comment.id, comment.author, comment.body)
+                }}
               />
               <RaisedButton
                 label="Delete"
                 backgroundColor="#ff9800"
                 labelColor="#fff"
-                onClick={this.deleteComment}
+                onClick={() => (this.deleteComment(comment.id))}
               />
             </div>
           </div>
@@ -166,11 +188,16 @@ class PostDetails extends Component {
           />
         </div>
         {openModal && (
-          <PostDialog
-            heading="Create a new Post!"
+          <CommentDialog
             open={this.state.openModal}
             closeModal={this.closeModal}
-            createPost={this.props.addPost}
+            createComment={this.props.addComment}
+            editComment={this.props.updateComment}
+            edit={edit}
+            commentId={editComment && ( editComment.id )}
+            author={editComment && ( editComment.author )}
+            message={editComment && ( editComment.message )}
+            parentId={this.props.match.params.post_id}
           />
         ) }
       </div>

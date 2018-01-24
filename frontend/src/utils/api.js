@@ -38,7 +38,7 @@ export function commentVote(id, option) {
   return post(url, body)
 }
 
-export function updateComent(id, body) {
+export function updateComment(id, body) {
   const url = `${BASE_URL}/comments/${id}`
   return put(url, JSON.stringify(body))
 }

@@ -1,6 +1,7 @@
 import * as API from '../utils/api'
 import * as type from './types'
 import { getPostsById } from './posts'
+const uuidv4 = require('uuid/v4')
 
 export const receiveComments = comments => ({
   type: type.RECEIVE_COMMENTS,
@@ -13,26 +14,29 @@ export const getCommentsByPostId = id => dispatch => (
     .then(comments => dispatch(receiveComments(comments)))
 )
 
-export const addComment = ({parentId, title, body, author}) => ({
-  type: type.ADD_COMMENT,
-  parentId,
-  title,
-  body,
-  author,
-})
+export const addComment = ({author, body, parentId}, postId) => dispatch => (
+  API
+    .postComment({
+      id: uuidv4(),
+      timestamp: Date.now(),
+      body,
+      author,
+      parentId,
+    })
+    .then(() => dispatch(getCommentsByPostId(postId)))
+)
 
-export const deleteComment = id => ({
-  type: type.DELETE_COMMENT,
-  id,
-})
+export const deleteComment = (commentId, postId) => dispatch => (
+  API
+    .deleteComment(commentId)
+    .then(() => dispatch(getCommentsByPostId(postId)))
+)
 
-export const editComment = ({id, title, body, author}) => ({
-  type: type.EDIT_COMMENT,
-  id,
-  title,
-  body,
-  author,
-})
+export const updateComment = (commentId, data, postId) => dispatch => (
+  API
+    .updateComment(commentId, data)
+    .then(() => dispatch(getCommentsByPostId(postId)))
+)
 
 export const upVoteComment = (id, postID, option) => dispatch => (
   API

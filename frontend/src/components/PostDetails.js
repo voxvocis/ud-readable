@@ -2,12 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import {
-  postVote,
-  getPostsById,
-  getCommentsByPostId,
-  upVoteComment,
-} from '../actions'
+import * as actions from '../actions'
 import Icon from 'react-icons-kit'
 import { heart } from 'react-icons-kit/icomoon/heart'
 import { heartBroken } from 'react-icons-kit/icomoon/heartBroken'
@@ -36,6 +31,11 @@ class PostDetails extends Component {
 
   commentDownVote = id => {
     this.props.upVoteComment(id, this.props.match.params.post_id, 'downVote')
+  }
+
+  deleteIt = () => {
+    this.props.deletePost(this.props.post.id)
+    this.props.history.push('/')
   }
 
   render() {
@@ -78,17 +78,18 @@ class PostDetails extends Component {
             </div>
           </div>
           <div className="Post-action-buttons">
-            <RaisedButton
-              label="Edit"
-              backgroundColor="#0099"
-              labelColor="#fff"
-              onClick={() => (console.log())}
-            />
+            <Link to={`/edit-post/${id}`}>
+              <RaisedButton
+                label="Edit"
+                backgroundColor="#0099"
+                labelColor="#fff"
+              />
+            </Link>
             <RaisedButton
               label="Delete"
               backgroundColor="#0099"
               labelColor="#fff"
-              onClick={() => (console.log())}
+              onClick={this.deleteIt}
             />
           </div>
         </div>
@@ -136,4 +137,4 @@ const mapStateToProps = ({ postDetails, comments }) => ({
     comments: Object.values(comments)
   })
 
-export default withRouter(connect(mapStateToProps, {postVote, getPostsById, getCommentsByPostId, upVoteComment})(PostDetails))
+export default withRouter(connect(mapStateToProps, actions)(PostDetails))

@@ -72,22 +72,10 @@ class Home extends Component {
                   comments={post.commentCount}
                   dispatchVote={this.props.postVote}
                   deletePost={this.props.deletePost}
-                  editPost={this.editPost}
                 />
               ))
             }
         </div>
-        {openModal && (
-          <PostDialog
-            open={this.state.openModal}
-            closeModal={this.closeModal}
-            categories={this.props.categories}
-            createPost={this.props.addPost}
-            edit={true}
-            postID={this.state.editId}
-            title={this.props.postDetails.title}
-          />
-        ) }
       </div>
     )
   }

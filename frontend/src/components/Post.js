@@ -18,10 +18,6 @@ export default function Post({ id, title, author, score, comments, date, dispatc
     deletePost(id)
   }
 
-  const edit = () => {
-    editPost(id)
-  }
-
   return (
     <div className="Post-container">
       <div className="Post-score">
@@ -54,12 +50,13 @@ export default function Post({ id, title, author, score, comments, date, dispatc
         </div>
       </div>
       <div className="Post-action-buttons">
-        <RaisedButton
-          label="Edit"
-          backgroundColor="#0099"
-          labelColor="#fff"
-          onClick={edit}
-        />
+        <Link to={`/edit-post/${id}`}>
+          <RaisedButton
+            label="Edit"
+            backgroundColor="#0099"
+            labelColor="#fff"           
+          />
+        </Link>
         <RaisedButton
           label="Delete"
           backgroundColor="#0099"

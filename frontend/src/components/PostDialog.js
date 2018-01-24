@@ -29,6 +29,11 @@ export default class PostDialog extends Component {
     this.props.closeModal()
   }
 
+  handleEditClose = () => {
+    this.setState({open: false})
+    this.props.closeModal()
+  }
+
   handleSubmit = () => {
     const body = {
       title: this.state.title,
@@ -47,7 +52,8 @@ export default class PostDialog extends Component {
       author: this.state.author,
       category: this.state.categoryValue,
     }
-    // this.props.createPost(body)
+    console.log(body)
+    this.props.editPost(body)
     this.handleClose()
   }
 
@@ -76,13 +82,13 @@ export default class PostDialog extends Component {
   }
 
   render() {
-    const { categories, edit } = this.props
+    const { categories, edit, heading } = this.props
 
     const actions = [
       <FlatButton
         label="Cancel"
         primary={true}
-        onClick={this.handleClose}
+        onClick={edit ? this.handleEditClose : this.handleClose}
       />,
       <FlatButton
         label={edit ? 'Edit' : 'Submit'}
@@ -98,9 +104,9 @@ export default class PostDialog extends Component {
         actions={actions}
         modal={false}
         open={this.state.open}
-        onRequestClose={this.handleClose}
+        onRequestClose={edit ? this.handleEditClose : this.handleClose}
       >
-        <center><h1>Create a new Post!</h1>
+        <center><h1>{heading}</h1>
         <div>
           <TextField
             floatingLabelText="Title"

@@ -75,6 +75,7 @@ class TopBar extends Component {
         </div>
         {openModal && (
           <PostDialog
+            heading="Create a new Post!"
             open={this.state.openModal}
             closeModal={this.closeModal}
             categories={categories}

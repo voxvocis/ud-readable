@@ -55,7 +55,7 @@ export function postPost(body) {
 }
 
 export function updatePost(id, body) {
-  const url = `${BASE_URL}/posts${id}`
+  const url = `${BASE_URL}/posts/${id}`
   return put(url, JSON.stringify(body))
 }
 

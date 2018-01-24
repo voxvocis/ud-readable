@@ -57,11 +57,11 @@ export const deletePost = id => dispatch => (
     .then(() => dispatch(getPosts()))
 )
 
-export const editPost = ({id, title, body, author, category}) => ({
-  type: type.EDIT_POST,
-  id,
-  title,
-  body,
-  author,
-  category,
-})
+export const updatePost = (id, data) => dispatch => (
+  API
+    .updatePost(id, data)
+    .then(() => {
+      dispatch(getPosts())
+      dispatch(getPostsById(id))
+    })
+)

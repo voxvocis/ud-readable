@@ -6,6 +6,7 @@ import '../styles/App.css';
 import Home from './Home'
 import TopBar from './TopBar'
 import PostDetails from './PostDetails'
+import EditPost from './EditPost'
 
 class App extends Component {
   render() {
@@ -15,8 +16,8 @@ class App extends Component {
         <Switch>
           <Route exact path='/' component={Home}/>
           <Route exact path='/:category' component={Home}/>
+          <Route exact path="/edit-post/:id" component={EditPost} />
           <Route exact path="/:category/:post_id" component={PostDetails} />
-          <Route exact path="/edit-post/:id" component={Home} />
           <Route path="*" component={NotFound} />
         </Switch>
       </div>
@@ -25,7 +26,7 @@ class App extends Component {
 }
 
 const NotFound = () => {
-  return <div>Not found</div>
+  return <div><h1>Not found</h1></div>
 }
 
 export default withRouter(connect()(App))

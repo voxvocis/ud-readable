@@ -94,7 +94,6 @@
 }
 
 .Comment-container {
-  height: 6em;
 }
 
 .Comment-title {
@@ -103,6 +102,10 @@
   color: #009;
   margin-bottom: 0.2em;
   color: transparent;
+}
+
+.Add-comment {
+  margin: 2em;
 }
 
 .Post-detail-body {

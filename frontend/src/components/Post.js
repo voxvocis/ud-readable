@@ -53,13 +53,13 @@ export default function Post({ id, title, author, score, comments, date, dispatc
         <Link to={`/edit-post/${id}`}>
           <RaisedButton
             label="Edit"
-            backgroundColor="#0099"
-            labelColor="#fff"           
+            backgroundColor="#ff9800"
+            labelColor="#fff"
           />
         </Link>
         <RaisedButton
           label="Delete"
-          backgroundColor="#0099"
+          backgroundColor="#ff9800"
           labelColor="#fff"
           onClick={deleteIt}
         />

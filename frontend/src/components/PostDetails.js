@@ -7,9 +7,23 @@ import Icon from 'react-icons-kit'
 import { heart } from 'react-icons-kit/icomoon/heart'
 import { heartBroken } from 'react-icons-kit/icomoon/heartBroken'
 import RaisedButton from 'material-ui/RaisedButton'
+import PostDialog from './PostDialog'
 import '../styles/App.css';
 
 class PostDetails extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      openModal: false,
+    }
+  }
+
+  closeModal = () => {
+    this.setState({
+      openModal: false,
+    })
+  }
 
   componentWillMount() {
     const id = this.props.match.params.post_id
@@ -39,7 +53,7 @@ class PostDetails extends Component {
   }
 
   render() {
-    console.log(this.props)
+    const { openModal } = this.state
     const { post, comments } = this.props
     const { voteScore, title, author, timestamp, body, commentCount, category, id} = post
     return (
@@ -81,13 +95,13 @@ class PostDetails extends Component {
             <Link to={`/edit-post/${id}`}>
               <RaisedButton
                 label="Edit"
-                backgroundColor="#0099"
+                backgroundColor="#ff9800"
                 labelColor="#fff"
               />
             </Link>
             <RaisedButton
               label="Delete"
-              backgroundColor="#0099"
+              backgroundColor="#ff9800"
               labelColor="#fff"
               onClick={this.deleteIt}
             />
@@ -95,7 +109,7 @@ class PostDetails extends Component {
         </div>
         <div className="Post-detail-comments" >
           <div className="Post-comment-wrapper">
-            Comments:
+            {comments.length !== 0 && ('Comments:')}
           </div>
         {comments.map(comment => (
           <div className="Comment-container" key={comment.id}>
@@ -124,9 +138,41 @@ class PostDetails extends Component {
             <div className="Post-detail-comment-body">
               {comment.body}
             </div>
+            <div className="Post-action-buttons">
+              <RaisedButton
+                label="Edit"
+                backgroundColor="#ff9800"
+                labelColor="#fff"
+                onClick={this.editComment}
+              />
+              <RaisedButton
+                label="Delete"
+                backgroundColor="#ff9800"
+                labelColor="#fff"
+                onClick={this.deleteComment}
+              />
+            </div>
           </div>
         ))}
         </div>
+        <div className="Add-comment">
+          <RaisedButton
+            label="New Comment"
+            backgroundColor="#0099"
+            labelColor="#fff"
+            onClick={() => this.setState({
+              openModal: true
+            })}
+          />
+        </div>
+        {openModal && (
+          <PostDialog
+            heading="Create a new Post!"
+            open={this.state.openModal}
+            closeModal={this.closeModal}
+            createPost={this.props.addPost}
+          />
+        ) }
       </div>
     )
   }

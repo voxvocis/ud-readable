@@ -4,6 +4,7 @@ import { withRouter } from 'react-router'
 import * as actions from '../actions/posts'
 import '../styles/App.css';
 import PostDialog from './PostDialog'
+const R = require('ramda')
 
 class EditPost extends Component {
   constructor(props) {
@@ -24,6 +25,12 @@ class EditPost extends Component {
   editPost = data => {
     const { postDetails, history, updatePost } = this.props
     updatePost(postDetails.id, data)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (R.isEmpty(nextProps.postDetails)) {
+      this.props.history.push('/404')
+    }
   }
 
   componentWillMount() {

@@ -9,6 +9,7 @@ import { heartBroken } from 'react-icons-kit/icomoon/heartBroken'
 import RaisedButton from 'material-ui/RaisedButton'
 import CommentDialog from './CommentDialog'
 import '../styles/App.css';
+const R = require('ramda')
 
 class PostDetails extends Component {
   constructor(props) {
@@ -27,6 +28,12 @@ class PostDetails extends Component {
       edit: false,
       editComment: null,
     })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (R.isEmpty(nextProps.post)) {
+      this.props.history.push('/404')
+    }
   }
 
   componentWillMount() {
@@ -73,7 +80,6 @@ class PostDetails extends Component {
 
   render() {
     const { openModal, editComment, edit } = this.state
-    console.log(editComment);
     const { post, comments } = this.props
     const { voteScore, title, author, timestamp, body, commentCount, category, id} = post
     return (

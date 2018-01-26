@@ -34,6 +34,9 @@ export const getPostsById = id => dispatch => (
     .then(post => dispatch(receivePostDetails(post)))
 )
 
+export const postDetailsDeleted = () => ({
+  type: type.POST_DETAILS_DELETED,
+})
 
 export const addPost = ({title, body, author, category}) => dispatch => (
   API
@@ -54,7 +57,10 @@ export const addPost = ({title, body, author, category}) => dispatch => (
 export const deletePost = id => dispatch => (
   API
     .deletePost(id)
-    .then(() => dispatch(getPosts()))
+    .then(() => {
+      dispatch(postDetailsDeleted())
+      dispatch(getPosts())
+    })
 )
 
 export const updatePost = (id, data) => dispatch => (

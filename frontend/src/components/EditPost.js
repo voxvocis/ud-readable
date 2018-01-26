@@ -24,11 +24,12 @@ class EditPost extends Component {
 
   editPost = data => {
     const { postDetails, history, updatePost } = this.props
-    updatePost(postDetails.id, data)
+    updatePost(postDetails.details.id, data)
   }
 
   componentWillReceiveProps(nextProps) {
-    if (R.isEmpty(nextProps.postDetails)) {
+    const { postDetails } = this.props
+    if (postDetails.deleted && R.isEmpty(nextProps.postDetails.details)) {
       this.props.history.push('/404')
     }
   }
@@ -43,7 +44,7 @@ class EditPost extends Component {
     const { openModal } = this.state
     return (
       <div>
-        {(postDetails.id === this.props.match.params.id) && (
+        {(postDetails.details.id === this.props.match.params.id) && (
           <PostDialog
             heading="Edit Post"
             open={this.state.openModal}
@@ -51,10 +52,10 @@ class EditPost extends Component {
             categories={categories}
             editPost={this.editPost}
             edit={true}
-            title={postDetails.title}
-            message={postDetails.body}
-            author={postDetails.author}
-            categoryValue={postDetails.category}
+            title={postDetails.details.title}
+            message={postDetails.details.body}
+            author={postDetails.details.author}
+            categoryValue={postDetails.details.category}
           />
         ) }
       </div>

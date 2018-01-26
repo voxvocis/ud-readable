@@ -31,7 +31,8 @@ class PostDetails extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (R.isEmpty(nextProps.post)) {
+    const { post } = this.props
+    if (post.deleted && R.isEmpty(nextProps.post.details)) {
       this.props.history.push('/404')
     }
   }
@@ -74,14 +75,14 @@ class PostDetails extends Component {
     this.props.deleteComment(id, this.props.match.params.post_id)
   }
   deleteIt = () => {
-    this.props.deletePost(this.props.post.id)
+    this.props.deletePost(this.props.post.details.id)
     this.props.history.push('/')
   }
 
   render() {
     const { openModal, editComment, edit } = this.state
     const { post, comments } = this.props
-    const { voteScore, title, author, timestamp, body, commentCount, category, id} = post
+    const { voteScore, title, author, timestamp, body, commentCount, category, id} = post.details
     return (
       <div className="Posts">
         <div className="Post-detail-container">

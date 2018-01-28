@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import * as actions from '../actions/posts'
 import '../styles/App.css';
-import PostDialog from './PostDialog'
+import PostDialog from '../components/PostDialog'
 const R = require('ramda')
 
 class EditPost extends Component {

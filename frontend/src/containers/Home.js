@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import * as actions from '../actions/posts'
 import '../styles/App.css';
-import Post from './Post'
-import PostDialog from './PostDialog'
+import Post from '../components/Post'
+import PostDialog from '../components/PostDialog'
 
 class Home extends Component {
   constructor(props) {

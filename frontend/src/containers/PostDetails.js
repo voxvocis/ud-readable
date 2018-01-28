@@ -7,7 +7,7 @@ import Icon from 'react-icons-kit'
 import { heart } from 'react-icons-kit/icomoon/heart'
 import { heartBroken } from 'react-icons-kit/icomoon/heartBroken'
 import RaisedButton from 'material-ui/RaisedButton'
-import CommentDialog from './CommentDialog'
+import CommentDialog from '../components/CommentDialog'
 import '../styles/App.css';
 const R = require('ramda')
 

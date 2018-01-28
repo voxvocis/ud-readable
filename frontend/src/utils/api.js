@@ -1,11 +1,12 @@
-const HEADERS = { 'Authorization': 'test' }
+const header = process.env.REACT_APP_API_HEADERS
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+const HEADERS = { 'Authorization': header }
 
 const POST_HEADERS = {
   ...HEADERS,
   "Content-Type": "application/json"
 }
-
-const BASE_URL = 'http://localhost:3001'
 
 export function getPosts() {
   const url = `${BASE_URL}/posts`

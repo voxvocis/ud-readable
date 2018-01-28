@@ -21,6 +21,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "react-app-env": "^1.2.0",
     "react-icons-kit": "^1.0.7"
   }
 }

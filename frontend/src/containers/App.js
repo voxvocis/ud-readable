@@ -7,7 +7,7 @@ import Home from './Home'
 import TopBar from './TopBar'
 import PostDetails from './PostDetails'
 import EditPost from './EditPost'
-import NotFound from './NotFound'
+import NotFound from '../components/NotFound'
 
 class App extends Component {
   render() {
